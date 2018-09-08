@@ -1,6 +1,6 @@
 {
   "name": "v8-coverage-merge",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "merge together two V8 coverage reports",
   "main": "index.js",
   "scripts": {
