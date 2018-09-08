@@ -2,6 +2,7 @@
 
 [![Build Status](https://travis-ci.org/bcoe/v8-coverage-merge.svg?branch=master)](https://travis-ci.org/bcoe/v8-coverage-merge)
 [![Conventional Commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-yellow.svg)](https://conventionalcommits.org)
+[![Coverage Status](https://coveralls.io/repos/github/bcoe/v8-coverage-merge/badge.svg?branch=master)](https://coveralls.io/github/bcoe/v8-coverage-merge?branch=master)
 
 Merges together the V8 inspector format JSON output for duplicate scripts:
 
