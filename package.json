@@ -22,5 +22,9 @@
   "files": [
     "index.js",
     "LICENSE"
-  ]
+  ],
+  "repository": {
+    "type": "git",
+    "url": "http://github.com/bcoe/v8-coverage-merge.git"
+  }
 }
