@@ -68,12 +68,19 @@ function mergeFunctions (func1, func2) {
     return a.endOffset - b.endOffset
   })
   for (const range of func2.ranges) {
-    let i = 0
-    for (let range2; (range2 = ranges[i]) !== undefined; i++) {
-      if (range.endOffset < range2.endOffset) break
+    // Look for the first `i` so that `ranges[i]` ends after `range` using
+    // binary search.
+    let minIndex = 0, maxIndex = ranges.length - 1
+    while (minIndex !== maxIndex) {
+      const middle = (minIndex + maxIndex) >>> 1
+      if (range.endOffset < ranges[middle].endOffset)
+        maxIndex = middle
+      else
+        minIndex = middle + 1
     }
+
     insertRange(
-      Math.min(i, ranges.length - 1),
+      minIndex,
       range,
       ranges
     )
@@ -82,7 +89,7 @@ function mergeFunctions (func1, func2) {
 }
 
 function insertRange (index, newRange, ranges) {
-  const oldRange = ranges.splice(index, 1)[0]
+  const oldRange = ranges[index]
   if (rangesEqual(newRange, oldRange)) {
     //    A B
     //    | |
@@ -91,7 +98,7 @@ function insertRange (index, newRange, ranges) {
     //    | |
     //    | |
     newRange.count += oldRange.count
-    Array.prototype.splice.apply(ranges, [index, 0, newRange])
+    ranges[index] = newRange
   } else if (newRange.startOffset <= oldRange.startOffset &&
              newRange.endOffset >= oldRange.startOffset &&
              newRange.endOffset <= oldRange.endOffset) {
@@ -108,8 +115,7 @@ function insertRange (index, newRange, ranges) {
     }
     newRange.endOffset = oldRange.startOffset
     oldRange.startOffset = splitRange.endOffset
-    Array.prototype.splice.apply(ranges, [index, 0, newRange, splitRange,
-      oldRange])
+    ranges.splice(index, 0, newRange, splitRange)
   } else if (newRange.startOffset >= oldRange.startOffset &&
         newRange.startOffset <= oldRange.endOffset &&
         newRange.endOffset >= oldRange.endOffset) {
@@ -126,8 +132,7 @@ function insertRange (index, newRange, ranges) {
     }
     newRange.startOffset = oldRange.endOffset
     oldRange.endOffset = splitRange.startOffset
-    Array.prototype.splice.apply(ranges, [index, 0, oldRange, splitRange,
-      newRange])
+    ranges.splice(index + 1, 0, splitRange, newRange)
   } else if (newRange.startOffset >= oldRange.startOffset &&
              newRange.endOffset <= oldRange.endOffset) {
     //    A B
@@ -146,8 +151,7 @@ function insertRange (index, newRange, ranges) {
     newRange.count = oldRange.count
 
     oldRange.startOffset = splitRange.endOffset
-    Array.prototype.splice.apply(ranges, [index, 0, newRange, splitRange,
-      oldRange])
+    ranges.splice(index, 0, newRange, splitRange)
   } else if (newRange.startOffset <= oldRange.startOffset &&
              newRange.endOffset >= oldRange.endOffset) {
     //    A B
@@ -169,8 +173,7 @@ function insertRange (index, newRange, ranges) {
     oldRange.startOffset = newRange.endOffset
     oldRange.endOffset = originalEndOffset
     oldRange.count = splitRange.count
-    Array.prototype.splice.apply(ranges, [index, 0, splitRange, newRange,
-      oldRange])
+    ranges.splice(index, 0, splitRange, newRange)
   } else if (newRange.endOffset < oldRange.endOffset) {
     //    A B
     //      |
@@ -178,7 +181,7 @@ function insertRange (index, newRange, ranges) {
     //    |
     //    |
     //    |
-    Array.prototype.splice.apply(ranges, [index, 0, newRange, oldRange])
+    ranges.splice(index, 0, newRange)
   } else {
     //    A B
     //    |
@@ -186,7 +189,7 @@ function insertRange (index, newRange, ranges) {
     //    |
     //      |
     //      |
-    Array.prototype.splice.apply(ranges, [index, 0, oldRange, newRange])
+    ranges.splice(index + 1, 0, newRange)
   }
 }
 
