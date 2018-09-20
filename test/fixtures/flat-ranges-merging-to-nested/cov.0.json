@@ -1,0 +1,49 @@
+{
+  "scriptId": "1",
+  "url": "/test/fixtures/nested-if/lib.js",
+  "functions": [
+    {
+      "functionName": "",
+      "ranges": [
+        {
+          "startOffset": 0,
+          "endOffset": 325,
+          "count": 1
+        }
+      ],
+      "isBlockCoverage": true
+    },
+    {
+      "functionName": "",
+      "ranges": [
+        {
+          "startOffset": 1,
+          "endOffset": 323,
+          "count": 1
+        }
+      ],
+      "isBlockCoverage": true
+    },
+    {
+      "functionName": "module.exports",
+      "ranges": [
+        {
+          "startOffset": 79,
+          "endOffset": 320,
+          "count": 1
+        },
+        {
+          "startOffset": 106,
+          "endOffset": 208,
+          "count": 0
+        },
+        {
+          "startOffset": 227,
+          "endOffset": 267,
+          "count": 0
+        }
+      ],
+      "isBlockCoverage": true
+    }
+  ]
+}

@@ -1,6 +1,6 @@
 /* global it, describe */
 
-const merge = require('./')
+const merge = require('../index')
 
 require('chai').should()
 
