@@ -4,7 +4,6 @@
   "description": "merge together two V8 coverage reports",
   "main": "index.js",
   "scripts": {
-    "pretest": "node ./test/fixtures/generate-fixtures.js",
     "test": "c8 --reporter=html --reporter=text mocha test",
     "coverage": "c8 --reporter=text-lcov mocha test.js | coveralls",
     "posttest": "standard",

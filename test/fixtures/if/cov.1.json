@@ -1,0 +1,54 @@
+{
+  "scriptId": "1",
+  "url": "/test/fixtures/if/lib.js",
+  "functions": [
+    {
+      "functionName": "",
+      "ranges": [
+        {
+          "startOffset": 0,
+          "endOffset": 328,
+          "count": 1
+        }
+      ],
+      "isBlockCoverage": true
+    },
+    {
+      "functionName": "",
+      "ranges": [
+        {
+          "startOffset": 1,
+          "endOffset": 326,
+          "count": 1
+        }
+      ],
+      "isBlockCoverage": true
+    },
+    {
+      "functionName": "module.exports",
+      "ranges": [
+        {
+          "startOffset": 79,
+          "endOffset": 323,
+          "count": 1
+        },
+        {
+          "startOffset": 135,
+          "endOffset": 167,
+          "count": 0
+        },
+        {
+          "startOffset": 182,
+          "endOffset": 208,
+          "count": 0
+        },
+        {
+          "startOffset": 295,
+          "endOffset": 321,
+          "count": 0
+        }
+      ],
+      "isBlockCoverage": true
+    }
+  ]
+}
