@@ -355,6 +355,63 @@ describe('v8-coverage-merge', () => {
     merged.functions[0].ranges.length.should.equal(8)
   })
 
+  it('merges multiple block ranges (reverse)', () => {
+    const merged = merge(
+      {
+        scriptId: '71',
+        url: '/Users/benjamincoe/oss/c8/test/fixtures/timeout.js',
+        functions: [
+          {
+            functionName: 'bar',
+            isBlockCoverage: true,
+            ranges: [
+              {
+                startOffset: 10,
+                endOffset: 60,
+                count: 1
+              },
+              {
+                startOffset: 70,
+                endOffset: 100,
+                count: 2
+              },
+              {
+                startOffset: 290,
+                endOffset: 310,
+                count: 0
+              }
+            ]
+          }
+        ]
+      },
+      {
+        scriptId: '70',
+        url: '/Users/benjamincoe/oss/c8/test/fixtures/timeout.js',
+        functions: [
+          {
+            functionName: 'bar',
+            isBlockCoverage: true,
+            ranges: [
+              {
+                startOffset: 30,
+                endOffset: 105,
+                count: 1
+              },
+              {
+                startOffset: 200,
+                endOffset: 300,
+                count: 2
+              }
+            ]
+          }
+        ]
+      }
+    )
+
+    merged.functions.length.should.equal(1)
+    merged.functions[0].ranges.length.should.equal(8)
+  })
+
   it('discards function coverage if block exists: b is function', () => {
     const merged = merge(
       {
